@@ -6,14 +6,16 @@
 #
 Name     : compat-webkitgtk-soname40
 Version  : 2.34.0
-Release  : 77
+Release  : 78
 URL      : https://webkitgtk.org/releases/webkitgtk-2.34.0.tar.xz
 Source0  : https://webkitgtk.org/releases/webkitgtk-2.34.0.tar.xz
 Source1  : https://webkitgtk.org/releases/webkitgtk-2.34.0.tar.xz.asc
 Summary  : Web content engine for GTK - web process extensions
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 LGPL-2.0 LGPL-2.1 MIT NCSA Unicode-DFS-2016
+Requires: compat-webkitgtk-soname40-data = %{version}-%{release}
 Requires: compat-webkitgtk-soname40-lib = %{version}-%{release}
+Requires: compat-webkitgtk-soname40-libexec = %{version}-%{release}
 Requires: compat-webkitgtk-soname40-license = %{version}-%{release}
 Requires: compat-webkitgtk-soname40-locales = %{version}-%{release}
 Requires: bubblewrap
@@ -108,13 +110,44 @@ There are no formal releases planned for this module, and it is not
 intended to be installed at this time.  Rather, it is meant to be used
 by other libraries or applications to add support for the MIME system.
 
+%package data
+Summary: data components for the compat-webkitgtk-soname40 package.
+Group: Data
+
+%description data
+data components for the compat-webkitgtk-soname40 package.
+
+
+%package dev
+Summary: dev components for the compat-webkitgtk-soname40 package.
+Group: Development
+Requires: compat-webkitgtk-soname40-lib = %{version}-%{release}
+Requires: compat-webkitgtk-soname40-data = %{version}-%{release}
+Provides: compat-webkitgtk-soname40-devel = %{version}-%{release}
+Requires: compat-webkitgtk-soname40 = %{version}-%{release}
+
+%description dev
+dev components for the compat-webkitgtk-soname40 package.
+
+
 %package lib
 Summary: lib components for the compat-webkitgtk-soname40 package.
 Group: Libraries
+Requires: compat-webkitgtk-soname40-data = %{version}-%{release}
+Requires: compat-webkitgtk-soname40-libexec = %{version}-%{release}
 Requires: compat-webkitgtk-soname40-license = %{version}-%{release}
 
 %description lib
 lib components for the compat-webkitgtk-soname40 package.
+
+
+%package libexec
+Summary: libexec components for the compat-webkitgtk-soname40 package.
+Group: Default
+Requires: compat-webkitgtk-soname40-license = %{version}-%{release}
+
+%description libexec
+libexec components for the compat-webkitgtk-soname40 package.
 
 
 %package license
@@ -142,7 +175,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1632771743
+export SOURCE_DATE_EPOCH=1632778910
 unset LD_AS_NEEDED
 mkdir -p clr-build
 pushd clr-build
@@ -169,7 +202,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1632771743
+export SOURCE_DATE_EPOCH=1632778910
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/compat-webkitgtk-soname40
 cp %{_builddir}/webkitgtk-2.34.0/Source/JavaScriptCore/COPYING.LIB %{buildroot}/usr/share/package-licenses/compat-webkitgtk-soname40/130f5281a2ef2a49822787e013323bde2ff119dd
@@ -202,240 +235,239 @@ popd
 %find_lang WebKit2GTK-4.0
 ## Remove excluded files
 rm -f %{buildroot}/usr/bin/WebKitWebDriver
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/JavaScriptCore/JSBase.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/JavaScriptCore/JSContextRef.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/JavaScriptCore/JSObjectRef.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/JavaScriptCore/JSStringRef.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/JavaScriptCore/JSTypedArray.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/JavaScriptCore/JSValueRef.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/JavaScriptCore/JavaScript.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/JavaScriptCore/WebKitAvailability.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCAutocleanups.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCClass.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCContext.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCDefines.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCException.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCOptions.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCValue.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCVersion.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCVirtualMachine.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/JSCWeakValue.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/jsc/jsc.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitApplicationInfo.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitAuthenticationRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitAutocleanups.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitAutomationSession.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitBackForwardList.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitBackForwardListItem.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitColorChooserRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitConsoleMessage.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenu.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenuActions.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenuItem.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitCookieManager.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitCredential.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitDefines.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitDeviceInfoPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitDownload.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitEditingCommands.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitEditorState.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitEnumTypes.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitError.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitFaviconDatabase.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitFileChooserRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitFindController.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitFormSubmissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitForwardDeclarations.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitFrame.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitGeolocationManager.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitGeolocationPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitHitTestResult.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitInputMethodContext.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitInstallMissingMediaPluginsPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitJavascriptResult.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitMediaKeySystemPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitMemoryPressureSettings.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitMimeInfo.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitNavigationAction.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitNavigationPolicyDecision.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitNetworkProxySettings.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitNotification.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitNotificationPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitOptionMenu.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitOptionMenuItem.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitPlugin.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitPointerLockPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitPolicyDecision.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitPrintCustomWidget.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitPrintOperation.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitResponsePolicyDecision.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitScriptDialog.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitScriptWorld.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitSecurityManager.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitSecurityOrigin.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitSettings.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitURIRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitURIResponse.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitURISchemeRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitURIUtilities.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitUserContent.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitUserContentFilterStore.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitUserContentManager.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitUserMediaPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitUserMessage.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitVersion.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebContext.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebEditor.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebExtension.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebExtensionAutocleanups.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebHitTestResult.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebInspector.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebPage.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebProcessEnumTypes.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebResource.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebView.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebViewBase.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebViewSessionState.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteData.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteDataAccessPermissionRequest.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteDataManager.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWebsitePolicies.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/WebKitWindowProperties.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/webkit-web-extension.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkit2/webkit2.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMAttr.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMBlob.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCDATASection.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSRule.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSRuleList.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSStyleDeclaration.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSStyleSheet.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSValue.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCharacterData.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMClientRect.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMClientRectList.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMComment.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCustom.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCustomUnstable.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMImplementation.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMSelection.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMTokenList.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMWindow.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMWindowUnstable.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDeprecated.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocument.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocumentFragment.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocumentFragmentUnstable.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocumentType.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocumentUnstable.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMElementUnstable.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMEvent.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMEventTarget.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMFile.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMFileList.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLAnchorElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLAppletElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLAreaElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLBRElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLBaseElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLBodyElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLButtonElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLCanvasElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLCollection.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLDListElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLDirectoryElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLDivElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLDocument.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLElementUnstable.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLEmbedElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFieldSetElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFontElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFormElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFrameElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFrameSetElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLHRElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLHeadElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLHeadingElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLHtmlElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLIFrameElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLImageElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLInputElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLLIElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLLabelElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLLegendElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLLinkElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLMapElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLMarqueeElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLMenuElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLMetaElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLModElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLOListElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLObjectElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLOptGroupElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLOptionElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLOptionsCollection.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLParagraphElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLParamElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLPreElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLQuoteElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLScriptElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLSelectElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLStyleElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableCaptionElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableCellElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableColElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableRowElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableSectionElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTextAreaElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTitleElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLUListElement.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMKeyboardEvent.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMMediaList.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMMouseEvent.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNamedNodeMap.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNode.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNodeFilter.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNodeIterator.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNodeList.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMObject.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMProcessingInstruction.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMRange.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMRangeUnstable.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMStyleSheet.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMStyleSheetList.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMText.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMTreeWalker.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMUIEvent.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMWheelEvent.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMXPathExpression.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMXPathNSResolver.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMXPathResult.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/webkitdom.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/webkitdomautocleanups.h
-rm -f %{buildroot}/usr/include/webkitgtk-4.0/webkitdom/webkitdomdefines.h
-rm -f %{buildroot}/usr/lib64/girepository-1.0/JavaScriptCore-4.0.typelib
-rm -f %{buildroot}/usr/lib64/girepository-1.0/WebKit2-4.0.typelib
-rm -f %{buildroot}/usr/lib64/girepository-1.0/WebKit2WebExtension-4.0.typelib
-rm -f %{buildroot}/usr/lib64/libjavascriptcoregtk-4.0.so
-rm -f %{buildroot}/usr/lib64/libwebkit2gtk-4.0.so
-rm -f %{buildroot}/usr/lib64/pkgconfig/javascriptcoregtk-4.0.pc
-rm -f %{buildroot}/usr/lib64/pkgconfig/webkit2gtk-4.0.pc
-rm -f %{buildroot}/usr/lib64/pkgconfig/webkit2gtk-web-extension-4.0.pc
-rm -f %{buildroot}/usr/lib64/webkit2gtk-4.0/injected-bundle/libwebkit2gtkinjectedbundle.so
-rm -f %{buildroot}/usr/libexec/webkit2gtk-4.0/MiniBrowser
-rm -f %{buildroot}/usr/libexec/webkit2gtk-4.0/WebKitNetworkProcess
-rm -f %{buildroot}/usr/libexec/webkit2gtk-4.0/WebKitWebProcess
-rm -f %{buildroot}/usr/libexec/webkit2gtk-4.0/jsc
-rm -f %{buildroot}/usr/share/gir-1.0/JavaScriptCore-4.0.gir
-rm -f %{buildroot}/usr/share/gir-1.0/WebKit2-4.0.gir
-rm -f %{buildroot}/usr/share/gir-1.0/WebKit2WebExtension-4.0.gir
 
 %files
 %defattr(-,root,root,-)
+
+%files data
+%defattr(-,root,root,-)
+/usr/lib64/girepository-1.0/JavaScriptCore-4.0.typelib
+/usr/lib64/girepository-1.0/WebKit2-4.0.typelib
+/usr/lib64/girepository-1.0/WebKit2WebExtension-4.0.typelib
+/usr/share/gir-1.0/*.gir
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/webkitgtk-4.0/JavaScriptCore/JSBase.h
+/usr/include/webkitgtk-4.0/JavaScriptCore/JSContextRef.h
+/usr/include/webkitgtk-4.0/JavaScriptCore/JSObjectRef.h
+/usr/include/webkitgtk-4.0/JavaScriptCore/JSStringRef.h
+/usr/include/webkitgtk-4.0/JavaScriptCore/JSTypedArray.h
+/usr/include/webkitgtk-4.0/JavaScriptCore/JSValueRef.h
+/usr/include/webkitgtk-4.0/JavaScriptCore/JavaScript.h
+/usr/include/webkitgtk-4.0/JavaScriptCore/WebKitAvailability.h
+/usr/include/webkitgtk-4.0/jsc/JSCAutocleanups.h
+/usr/include/webkitgtk-4.0/jsc/JSCClass.h
+/usr/include/webkitgtk-4.0/jsc/JSCContext.h
+/usr/include/webkitgtk-4.0/jsc/JSCDefines.h
+/usr/include/webkitgtk-4.0/jsc/JSCException.h
+/usr/include/webkitgtk-4.0/jsc/JSCOptions.h
+/usr/include/webkitgtk-4.0/jsc/JSCValue.h
+/usr/include/webkitgtk-4.0/jsc/JSCVersion.h
+/usr/include/webkitgtk-4.0/jsc/JSCVirtualMachine.h
+/usr/include/webkitgtk-4.0/jsc/JSCWeakValue.h
+/usr/include/webkitgtk-4.0/jsc/jsc.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitApplicationInfo.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitAuthenticationRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitAutocleanups.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitAutomationSession.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitBackForwardList.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitBackForwardListItem.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitColorChooserRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitConsoleMessage.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenu.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenuActions.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenuItem.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitCookieManager.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitCredential.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitDefines.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitDeviceInfoPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitDownload.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitEditingCommands.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitEditorState.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitEnumTypes.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitError.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitFaviconDatabase.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitFileChooserRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitFindController.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitFormSubmissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitForwardDeclarations.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitFrame.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitGeolocationManager.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitGeolocationPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitHitTestResult.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitInputMethodContext.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitInstallMissingMediaPluginsPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitJavascriptResult.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitMediaKeySystemPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitMemoryPressureSettings.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitMimeInfo.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitNavigationAction.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitNavigationPolicyDecision.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitNetworkProxySettings.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitNotification.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitNotificationPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitOptionMenu.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitOptionMenuItem.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitPlugin.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitPointerLockPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitPolicyDecision.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitPrintCustomWidget.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitPrintOperation.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitResponsePolicyDecision.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitScriptDialog.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitScriptWorld.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitSecurityManager.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitSecurityOrigin.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitSettings.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitURIRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitURIResponse.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitURISchemeRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitURIUtilities.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitUserContent.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitUserContentFilterStore.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitUserContentManager.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitUserMediaPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitUserMessage.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitVersion.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebContext.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebEditor.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebExtension.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebExtensionAutocleanups.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebHitTestResult.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebInspector.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebPage.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebProcessEnumTypes.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebResource.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebView.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebViewBase.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebViewSessionState.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteData.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteDataAccessPermissionRequest.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteDataManager.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebsitePolicies.h
+/usr/include/webkitgtk-4.0/webkit2/WebKitWindowProperties.h
+/usr/include/webkitgtk-4.0/webkit2/webkit-web-extension.h
+/usr/include/webkitgtk-4.0/webkit2/webkit2.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMAttr.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMBlob.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCDATASection.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSRule.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSRuleList.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSStyleDeclaration.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSStyleSheet.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCSSValue.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCharacterData.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMClientRect.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMClientRectList.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMComment.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCustom.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCustomUnstable.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMImplementation.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMSelection.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMTokenList.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMWindow.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMWindowUnstable.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDeprecated.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocument.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocumentFragment.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocumentFragmentUnstable.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocumentType.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDocumentUnstable.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMElementUnstable.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMEvent.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMEventTarget.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMFile.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMFileList.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLAnchorElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLAppletElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLAreaElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLBRElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLBaseElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLBodyElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLButtonElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLCanvasElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLCollection.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLDListElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLDirectoryElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLDivElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLDocument.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLElementUnstable.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLEmbedElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFieldSetElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFontElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFormElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFrameElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLFrameSetElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLHRElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLHeadElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLHeadingElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLHtmlElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLIFrameElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLImageElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLInputElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLLIElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLLabelElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLLegendElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLLinkElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLMapElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLMarqueeElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLMenuElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLMetaElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLModElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLOListElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLObjectElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLOptGroupElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLOptionElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLOptionsCollection.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLParagraphElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLParamElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLPreElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLQuoteElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLScriptElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLSelectElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLStyleElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableCaptionElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableCellElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableColElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableRowElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableSectionElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTextAreaElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTitleElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLUListElement.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMKeyboardEvent.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMMediaList.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMMouseEvent.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNamedNodeMap.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNode.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNodeFilter.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNodeIterator.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMNodeList.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMObject.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMProcessingInstruction.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMRange.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMRangeUnstable.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMStyleSheet.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMStyleSheetList.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMText.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMTreeWalker.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMUIEvent.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMWheelEvent.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMXPathExpression.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMXPathNSResolver.h
+/usr/include/webkitgtk-4.0/webkitdom/WebKitDOMXPathResult.h
+/usr/include/webkitgtk-4.0/webkitdom/webkitdom.h
+/usr/include/webkitgtk-4.0/webkitdom/webkitdomautocleanups.h
+/usr/include/webkitgtk-4.0/webkitdom/webkitdomdefines.h
+/usr/lib64/libjavascriptcoregtk-4.0.so
+/usr/lib64/libwebkit2gtk-4.0.so
+/usr/lib64/pkgconfig/javascriptcoregtk-4.0.pc
+/usr/lib64/pkgconfig/webkit2gtk-4.0.pc
+/usr/lib64/pkgconfig/webkit2gtk-web-extension-4.0.pc
 
 %files lib
 %defattr(-,root,root,-)
@@ -443,6 +475,14 @@ rm -f %{buildroot}/usr/share/gir-1.0/WebKit2WebExtension-4.0.gir
 /usr/lib64/libjavascriptcoregtk-4.0.so.18.19.5
 /usr/lib64/libwebkit2gtk-4.0.so.37
 /usr/lib64/libwebkit2gtk-4.0.so.37.55.3
+/usr/lib64/webkit2gtk-4.0/injected-bundle/libwebkit2gtkinjectedbundle.so
+
+%files libexec
+%defattr(-,root,root,-)
+/usr/libexec/webkit2gtk-4.0/MiniBrowser
+/usr/libexec/webkit2gtk-4.0/WebKitNetworkProcess
+/usr/libexec/webkit2gtk-4.0/WebKitWebProcess
+/usr/libexec/webkit2gtk-4.0/jsc
 
 %files license
 %defattr(0644,root,root,0755)
