@@ -6,7 +6,7 @@
 #
 Name     : compat-webkitgtk-soname40
 Version  : 2.34.1
-Release  : 81
+Release  : 82
 URL      : https://webkitgtk.org/releases/webkitgtk-2.34.1.tar.xz
 Source0  : https://webkitgtk.org/releases/webkitgtk-2.34.1.tar.xz
 Source1  : https://webkitgtk.org/releases/webkitgtk-2.34.1.tar.xz.asc
